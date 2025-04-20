@@ -14,3 +14,9 @@ test('User Pages', async ({ page }) => {
   await page.getByRole('link', { name: 'List Stuff' }).click();
   await expect(page.getByRole('heading', { name: 'Stuff' })).toBeVisible();
 });
+
+test('List Stuff Page', async ({ page }) => {
+  page.on('console', msg => console.log(msg.text())); // Log browser console messages
+  page.on('requestfailed', request => console.log(`Request failed: ${request.url()}`)); // Log failed requests
+  await page.goto('http://localhost:3000/list');
+});
